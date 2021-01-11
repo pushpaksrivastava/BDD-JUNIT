@@ -1,8 +1,5 @@
 package com.example.BDDJUNIT;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class DiscountService {
 
 	public String getDiscount(int amount) {
