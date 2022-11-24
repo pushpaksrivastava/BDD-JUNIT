@@ -15,8 +15,23 @@ steps:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
     jdkVersionOption: '1.8'
+    mavenAuthenticateFeed: false
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    goals: 'clean test'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    OverWrite: true
